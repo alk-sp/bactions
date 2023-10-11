@@ -38,6 +38,9 @@ jobs:
         # In this case we want to upload the SAST issues to GitHub Code Scanning
         uses: snyk/actions/setup@b98d498629f1c368650224d6d212bf7dfa89e4bf
 
+      - name: Alias snyk cli
+        run: alias snyk="snyk-linux"
+
         # For Snyk Open Source you must first set up the development environment for your application's dependencies
         # For example for Node
       - name : Set up Node environment
@@ -60,15 +63,15 @@ jobs:
 
         # Runs Snyk Infrastructure as Code (IaC) analysis and uploads result to Snyk.
         # Use || true to not fail the pipeline.
-      - name: Snyk IaC test and report
-        run: snyk iac test --report # || true
+     # - name: Snyk IaC test and report
+     #   run: snyk iac test --report # || true
 
         # Build the docker image for testing
-      - name: Build a Docker image
-        run: docker build -t your/image-to-test .
+     # - name: Build a Docker image
+     #   run: docker build -t your/image-to-test .
         # Runs Snyk Container (Container and SCA) analysis and uploads result to Snyk.
-      - name: Snyk Container monitor
-        run: snyk container monitor your/image-to-test --file=Dockerfile
+     # - name: Snyk Container monitor
+     #   run: snyk container monitor your/image-to-test --file=Dockerfile
 
         # Push the Snyk Code results into GitHub Code Scanning tab
       - name: Upload result to GitHub Code Scanning
